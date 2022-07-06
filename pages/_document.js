@@ -18,7 +18,7 @@ export default function Document() {
           content="Realiza sorteos en tus eventos! Puedes usar los asistentes de meetup o saraos.tech, también mediante #hashtags de Twitter."
         />
 
-        <meta property="og:url" content="https://sorteatealgo.vercel.app/" />
+        <meta property="og:url" content="https://sorteate-algo.vercel.app/" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Sortéate 🦄 algo para tu evento" />
         <meta
@@ -27,14 +27,14 @@ export default function Document() {
         />
         <meta
           property="og:image"
-          content="https://sortate.vercel.app/social.png"
+          content="https://sorteate-algo.vercel.app/social.png"
         />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content="sorteatealgo.vercel.app" />
+        <meta property="twitter:domain" content="sorteate-algo.vercel.app" />
         <meta
           property="twitter:url"
-          content="https://sorteatealgo.vercel.app/"
+          content="https://sorteate-algo.vercel.app/"
         />
         <meta name="twitter:title" content="Sortéate 🦄 algo para tu evento" />
         <meta
@@ -43,7 +43,7 @@ export default function Document() {
         />
         <meta
           name="twitter:image"
-          content="https://sortate.vercel.app/social.png"
+          content="https://sorteate-algo.vercel.app/social.png"
         />
       </Head>
       <body>

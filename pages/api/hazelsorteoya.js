@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   if (source.startsWith("#")) {
     const { data, includes } = await (
       await fetch(
-        "https://api.twitter.com/2/tweets/search/recent?tweet.fields=author_id&user.fields=&query=desarrollo&expansions=author_id",
+        `https://api.twitter.com/2/tweets/search/recent?tweet.fields=author_id&user.fields=&query=${source}&expansions=author_id`,
         {
           headers: {
             Authorization: `Bearer ${process.env.TWITTER_BEARER_TOKEN}`,
@@ -22,8 +22,6 @@ export default async function handler(req, res) {
       const user = includes.users.find((user) => user.id === tweet.author_id);
       return `${user.name}(@${user.username}) | ${tweet.text}`;
     });
-
-    console.log(data);
   }
 
   if (source.indexOf("saraos.tech") > -1) {
@@ -50,7 +48,6 @@ export default async function handler(req, res) {
     const { responses } = await response.json();
 
     result.attendees = responses[0].value.map((attendee) => {
-      console.log(attendee.member.name);
       return attendee.member.name;
     });
   }
@@ -61,13 +58,12 @@ export default async function handler(req, res) {
   res.status(200).json(result);
 }
 
-//https://www.meetup.com/es-ES/gdg-jaen/events/286650808
 function getNameAndCodeMeetup(url) {
   const urlWithoutProtocol = url.replace("https://", "");
   const urlSplit = urlWithoutProtocol.split("/");
   const code = urlSplit[4];
   const name = urlSplit[2];
-  console.log(urlSplit);
+
   return {
     code,
     name,
