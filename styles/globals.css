@@ -4,6 +4,13 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+
+  background: #921aa0;
+  background: linear-gradient(
+    43deg,
+    #921aa030 0%,
+    rgba(63, 63, 99, 0.0046612394957983305) 100%
+  );
 }
 
 a {
@@ -13,4 +20,24 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+button {
+  cursor: pointer;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 30px;
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  color: white;
+  background: #921aa0;
+  margin-bottom: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
 }

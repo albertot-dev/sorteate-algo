@@ -1,0 +1,19 @@
+.error {
+  color: rgb(229, 65, 65);
+  padding: 10px 20px;
+  border: 1px solid rgb(229, 65, 65);
+  border-radius: 10px;
+  opacity: 1;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
