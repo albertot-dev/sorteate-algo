@@ -46,10 +46,14 @@ export default async function handler(req, res) {
       `https://www.meetup.com/mu_api/urlname/events/eventId/attendees?queries=(endpoint:${name}/events/${code}/attendance,meta:(method:get),params:(fields:'answers'),ref:eventAttendance_${name}_${code},type:attendance)`
     );
     const { responses } = await response.json();
-
-    result.attendees = responses[0].value.map((attendee) => {
-      return attendee.member.name;
-    });
+    if (responses[0].error) {
+      return res.status(404).json({ message: "Evento no encontrado" });
+    }
+    result.attendees = responses[0]
+      ? responses[0]?.value?.map((attendee) => {
+          return attendee.member.name;
+        })
+      : [];
   }
 
   const rand = ~~(Math.random() * result.attendees.length);

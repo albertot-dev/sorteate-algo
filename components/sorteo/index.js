@@ -11,6 +11,7 @@ export default function Sorteo({ platform }) {
 
   useEffect(() => {
     setResult(null);
+    setError(null);
     setSource("");
     urlInput.current.value = "";
   }, [platform]);
@@ -55,7 +56,11 @@ export default function Sorteo({ platform }) {
     })
       .then((response) => response.json())
       .then((dog) => {
-        setResult(dog);
+        if (!dog.message) {
+          setResult(dog);
+        } else {
+          setError("No se ha encontrado el evento o hay 0 asistentes");
+        }
       })
       .catch((err) => console.log(err));
   };
