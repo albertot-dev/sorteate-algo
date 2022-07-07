@@ -35,6 +35,7 @@ export default async function handler(req, res) {
       "https://saraos.tech/@xaendevs/events/testeando-wvogwf2x57478l7ohxxjk/rsvp"
     );
     const data = await response.text();
+    console.log(data);
     const startString = '<script id="__NEXT_DATA__" type="application/json">';
     const endString = "</script>";
     const step1 = data.substring(
