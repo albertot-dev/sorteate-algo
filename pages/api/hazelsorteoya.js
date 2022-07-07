@@ -1,5 +1,3 @@
-const scrapeIt = require("scrape-it");
-
 export default async function handler(req, res) {
   const result = {
     winner: null,
@@ -33,33 +31,23 @@ export default async function handler(req, res) {
   }
 
   if (source.indexOf("saraos.tech") > -1) {
+    const response = await fetch(
+      "https://saraos.tech/@xaendevs/events/testeando-wvogwf2x57478l7ohxxjk/rsvp"
+    );
+    const data = await response.text();
+    const startString = '<script id="__NEXT_DATA__" type="application/json">';
+    const endString = "</script>";
+    const step1 = data.substring(
+      data.indexOf(startString) + startString.length
+    );
+    const step2 = step1.substring(0, step1.indexOf(endString));
     const {
-      data: { attendees },
-    } = await scrapeIt(
-      source + "/rsvp", //"https://saraos.tech/@xaendevs/events/testeando-wvogwf2x57478l7ohxxjk/rsvp",
-      {
-        attendees: {
-          listItem: "div.css-83quh3",
-          data: {
-            nombre: "p.css-lalfd2",
-          },
-        },
-      }
-    );
-    const test = await scrapeIt(
-      source + "/rsvp", //"https://saraos.tech/@xaendevs/events/testeando-wvogwf2x57478l7ohxxjk/rsvp",
-      {
-        attendees: {
-          listItem: "div.css-83quh3",
-          data: {
-            nombre: "p.css-lalfd2",
-          },
-        },
-      }
-    );
-    console.log(test);
-    console.log(attendees);
-    result.attendees = attendees.map((attendee) => attendee.nombre);
+      props: {
+        pageProps: { attendances },
+      },
+    } = JSON.parse(step2);
+
+    result.attendees = attendances.map((attendee) => attendee.user.name);
   }
   if (source.indexOf("meetup.com") > -1) {
     const { code, name } = getNameAndCodeMeetup(source);
