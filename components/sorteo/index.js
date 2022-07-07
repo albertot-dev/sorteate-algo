@@ -56,7 +56,7 @@ export default function Sorteo({ platform }) {
     })
       .then((response) => response.json())
       .then((dog) => {
-        if (!dog.message) {
+        if (!dog.message && dog.attendees.length > 0) {
           setResult(dog);
         } else {
           setError("No se ha encontrado el evento o hay 0 asistentes");

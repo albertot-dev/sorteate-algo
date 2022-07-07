@@ -46,6 +46,19 @@ export default async function handler(req, res) {
         },
       }
     );
+    const test = await scrapeIt(
+      source + "/rsvp", //"https://saraos.tech/@xaendevs/events/testeando-wvogwf2x57478l7ohxxjk/rsvp",
+      {
+        attendees: {
+          listItem: "div.css-83quh3",
+          data: {
+            nombre: "p.css-lalfd2",
+          },
+        },
+      }
+    );
+    console.log(test);
+    console.log(attendees);
     result.attendees = attendees.map((attendee) => attendee.nombre);
   }
   if (source.indexOf("meetup.com") > -1) {
