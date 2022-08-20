@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useState } from "react";
 import Sorteo from "../components/sorteo";
 import styles from "../styles/Home.module.css";
+import splitbee from "@splitbee/web";
 
 export default function Home() {
   const [sourceSelected, setSource] = useState(Platforms[0]);
@@ -41,7 +42,6 @@ export default function Home() {
         </div>
         {sourceComponent}
       </main>
-
       <footer className={styles.footer}>
         <a
           href="https://github.com/albertot-dev"

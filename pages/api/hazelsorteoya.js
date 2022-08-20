@@ -31,25 +31,24 @@ export default async function handler(req, res) {
   }
 
   if (source.indexOf("saraos.tech") > -1) {
+    const eventUrlParts = source.split("/");
+    const eventId = eventUrlParts[eventUrlParts.length - 1].split("-")[1];
     const response = await fetch(
-      "https://saraos.tech/@xaendevs/events/testeando-wvogwf2x57478l7ohxxjk/rsvp"
+      `https://saraos.tech/api/p/communities/xauendevs/events/${eventId}/attendances`,
+      {
+        headers: {
+          "X-Api-Key": `${process.env.SARAOS_API_TOKEN}`,
+        },
+      }
     );
-    const data = await response.text();
 
-    const startString = '<script id="__NEXT_DATA__" type="application/json">';
-    const endString = "</script>";
-    const step1 = data.substring(
-      data.indexOf(startString) + startString.length
-    );
-    console.log(step1);
-    const step2 = step1.substring(0, step1.indexOf(endString));
-    const {
-      props: {
-        pageProps: { attendances },
-      },
-    } = JSON.parse(step2);
-
-    result.attendees = attendances.map((attendee) => attendee.user.name);
+    const { data } = await response.json();
+    if (!data) {
+      return res.status(404).json({ message: "No se encontraron resultados" });
+    }
+    result.attendees = data
+      .filter((attendee) => attendee.rsvp === "YES")
+      .map((attendee) => attendee.user.name);
   }
   if (source.indexOf("meetup.com") > -1) {
     const { code, name } = getNameAndCodeMeetup(source);
