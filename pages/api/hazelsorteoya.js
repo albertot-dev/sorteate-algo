@@ -41,8 +41,7 @@ export default async function handler(req, res) {
         },
       }
     );
-    const t = await response.text();
-    console.log(t);
+
     const { data } = await response.json();
     if (!data) {
       return res.status(404).json({ message: "No se encontraron resultados" });
