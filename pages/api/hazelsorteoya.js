@@ -32,7 +32,9 @@ export default async function handler(req, res) {
 
   if (source.indexOf("saraos.tech") > -1) {
     const eventUrlParts = source.split("/");
-    const eventId = eventUrlParts[eventUrlParts.length - 1].split("-")[1];
+    const eventNameId = eventUrlParts[eventUrlParts.length - 1].split("-");
+    const eventId = eventNameId[eventNameId.length - 1];
+
     const response = await fetch(
       `https://saraos.tech/api/p/communities/xauendevs/events/${eventId}/attendances`,
       {
@@ -43,6 +45,7 @@ export default async function handler(req, res) {
     );
 
     const { data } = await response.json();
+
     if (!data) {
       return res.status(404).json({ message: "No se encontraron resultados" });
     }
