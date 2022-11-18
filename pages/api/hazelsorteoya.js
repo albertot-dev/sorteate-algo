@@ -1,3 +1,5 @@
+import getWinnerFromTwitter from "libs/twitter";
+
 export default async function handler(req, res) {
   const result = {
     winner: null,
@@ -6,28 +8,7 @@ export default async function handler(req, res) {
   const { source } = JSON.parse(req.body);
 
   if (source.startsWith("#")) {
-    const { data, includes } = await (
-      await fetch(
-        `https://api.twitter.com/2/tweets/search/recent?tweet.fields=author_id&user.fields=&query=${encodeURIComponent(
-          source
-        )}%20-is:retweet&expansions=author_id`,
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.TWITTER_BEARER_TOKEN}`,
-          },
-        }
-      )
-    ).json();
-    if (data) {
-      return res.json({
-        message: "No se encontraron resultados",
-      });
-    }
-    result.attendees =
-      data?.map((tweet) => {
-        const user = includes.users.find((user) => user.id === tweet.author_id);
-        return `${user.name}(@${user.username}) | ${tweet.text}`;
-      }) || [];
+    result.attendees = await getWinnerFromTwitter(source);
   }
 
   if (source.indexOf("saraos.tech") > -1) {

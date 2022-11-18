@@ -5,6 +5,7 @@ import ErrorUrl from "components/error-url";
 import Result from "components/result";
 import ValidUrl from "libs/valid-url";
 export default function Sorteo({ platform }) {
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [source, setSource] = useState("");
   const [result, setResult] = useState(null);
@@ -35,7 +36,7 @@ export default function Sorteo({ platform }) {
 
   const handleSortear = async () => {
     setResult(null);
-
+    setIsLoading(true);
     if (!source.startsWith("https://") && !source.startsWith("#")) {
       setError("La URL debe comenzar con https://");
       return;
@@ -56,13 +57,17 @@ export default function Sorteo({ platform }) {
     })
       .then((response) => response.json())
       .then((dog) => {
+        setIsLoading(false);
         if (!dog.message && dog.attendees.length > 0) {
           setResult(dog);
         } else {
           setError("No se ha encontrado el evento o hay 0 asistentes");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setIsLoading(false);
+        console.log(err);
+      });
   };
 
   return (
@@ -88,7 +93,7 @@ export default function Sorteo({ platform }) {
             }
           />
           <button
-            disabled={!source || source.length < 3}
+            disabled={!source || source.length < 3 || isLoading}
             onClick={handleSortear}
             type="button"
           >
