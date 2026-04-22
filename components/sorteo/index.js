@@ -14,6 +14,7 @@ export default function Sorteo({ platform }) {
   const [participants, setParticipants] = useState("");
   const [minRange, setMinRange] = useState("");
   const [maxRange, setMaxRange] = useState("");
+  const urlInput = useRef();
 
   useEffect(() => {
     setResult(null);
@@ -23,7 +24,7 @@ export default function Sorteo({ platform }) {
     setMinRange("");
     setMaxRange("");
     setMode("url");
-    urlInput.current.value = "";
+    if (urlInput.current) urlInput.current.value = "";
   }, [platform]);
 
   const handleClose = () => {
@@ -34,14 +35,12 @@ export default function Sorteo({ platform }) {
   const handleSource = (e) => {
     if (!e.target.value.startsWith("#") && platform.id === "twitter") {
       setSource("#" + e.target.value);
-      urlInput.current.value = "#" + e.target.value;
+      if (urlInput.current) urlInput.current.value = "#" + e.target.value;
     } else {
       setSource(e.target.value);
-      urlInput.current.value = e.target.value;
+      if (urlInput.current) urlInput.current.value = e.target.value;
     }
   };
-
-  const urlInput = useRef();
 
   const handleSortear = async () => {
     setResult(null);

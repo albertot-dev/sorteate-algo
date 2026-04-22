@@ -14,7 +14,7 @@ export default function Result({ result, isTwitter, isInstagram, onClose }) {
         <div className={styles.result}>
           <h2>Ganador 🏆</h2>
           <div className={styles.winner}>
-            <h1>{(isTwitter || isInstagram) ? result.winner.split(" | ")[0] : result.winner}</h1>
+            <h1>{(isTwitter || isInstagram) && result.winner.includes(" | ") ? result.winner.split(" | ")[0] : result.winner}</h1>
           </div>
           
           <div className={styles.buttonGroup}>
@@ -38,7 +38,7 @@ export default function Result({ result, isTwitter, isInstagram, onClose }) {
                       attendee === result.winner ? styles.winner : ''
                     }`}
                   >
-                    {(isTwitter || isInstagram) ? attendee.split(" | ")[0] : attendee}
+                    {(isTwitter || isInstagram) && attendee.includes(" | ") ? attendee.split(" | ")[0] : attendee}
                     {attendee === result.winner && <span className={styles.badge}>🏆</span>}
                   </div>
                 ))}
