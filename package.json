@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@splitbee/web": "^0.3.0",
+    "components": "^0.1.0",
+    "libs": "^0.1.2",
     "next": "12.2.0",
     "react": "18.2.0",
     "react-confetti": "^6.1.0",

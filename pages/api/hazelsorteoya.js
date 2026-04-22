@@ -8,7 +8,9 @@ export default async function handler(req, res) {
   const { source } = JSON.parse(req.body);
 
   if (source.startsWith("#")) {
-    result.attendees = await getWinnerFromTwitter(source);
+    // Para Twitter/X e Instagram ambos usan hashtags
+    const platform = req.body ? JSON.parse(req.body).platform : null;
+    result.attendees = await getWinnerFromTwitter(source, platform);
   }
 
   if (source.indexOf("saraos.tech") > -1) {
@@ -34,36 +36,8 @@ export default async function handler(req, res) {
       .filter((attendee) => attendee.rsvp === "YES")
       .map((attendee) => attendee.user.name);
   }
-  if (source.indexOf("meetup.com") > -1) {
-    const { code, name } = getNameAndCodeMeetup(source);
-    const response = await fetch(
-      `https://www.meetup.com/mu_api/urlname/events/eventId/attendees?queries=(endpoint:${name}/events/${code}/attendance,meta:(method:get),params:(fields:'answers'),ref:eventAttendance_${name}_${code},type:attendance)`
-    );
-    const { responses } = await response.json();
-    if (responses[0].error) {
-      return res.status(404).json({ message: "Evento no encontrado" });
-    }
-    result.attendees = responses[0]
-      ? responses[0]?.value?.map((attendee) => {
-          return attendee.member.name;
-        })
-      : [];
-  }
-
   const rand = ~~(Math.random() * result.attendees.length);
   result.winner = result.attendees[rand];
 
   res.status(200).json(result);
-}
-
-function getNameAndCodeMeetup(url) {
-  const urlWithoutProtocol = url.replace("https://", "");
-  const urlSplit = urlWithoutProtocol.split("/");
-  const code = urlSplit[4];
-  const name = urlSplit[2];
-
-  return {
-    code,
-    name,
-  };
 }

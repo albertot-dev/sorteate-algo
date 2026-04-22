@@ -25,4 +25,89 @@
   z-index: 1;
   padding: 2rem;
   border-radius: 10px;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.result button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #1da1f2;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.result button:hover {
+  background-color: #1a8cd8;
+}
+
+.secondaryBtn {
+  background-color: #f7f7f7 !important;
+  color: #1da1f2 !important;
+  border: 2px solid #1da1f2 !important;
+}
+
+.secondaryBtn:hover {
+  background-color: #1da1f2 !important;
+  color: white !important;
+}
+
+.participantsList {
+  margin-top: 2rem;
+  text-align: left;
+  border-top: 2px solid #f0f0f0;
+  padding-top: 1.5rem;
+}
+
+.participantsList h3 {
+  margin-bottom: 1rem;
+  color: #333;
+  text-align: center;
+}
+
+.listContainer {
+  max-height: 300px;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+}
+
+.participant {
+  padding: 0.75rem;
+  background-color: #f7f7f7;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease;
+}
+
+.participant:hover {
+  background-color: #e8e8e8;
+}
+
+.participant.winner {
+  background-color: #fff4e6;
+  border-left: 4px solid #ffc107;
+  font-weight: 600;
+}
+
+.badge {
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
 }

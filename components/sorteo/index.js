@@ -53,6 +53,7 @@ export default function Sorteo({ platform }) {
       method: "POST",
       body: JSON.stringify({
         source,
+        platform: platform.id,
       }),
     })
       .then((response) => response.json())
@@ -108,6 +109,7 @@ export default function Sorteo({ platform }) {
           <Result
             result={result}
             isTwitter={platform.id === "twitter"}
+            isInstagram={platform.id === "instagram"}
             onClose={handleClose}
           />
         )}
