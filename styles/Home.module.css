@@ -16,7 +16,7 @@
   display: flex;
   flex: 1;
   padding: 2rem 0;
-  border-top: 1px solid #eaeaea;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   justify-content: center;
   align-items: center;
 }
@@ -26,12 +26,22 @@
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+  color: rgba(255, 255, 255, 0.8);
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: white;
 }
 
 .title {
   margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
+  line-height: 1.2;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  letter-spacing: -1px;
 }
 
 .title,
@@ -45,9 +55,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.3);
   z-index: -1;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px);
 }
 
 .box:before {
@@ -58,19 +68,19 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100%);
+  background: linear-gradient(-45deg, #f093fb 0%, #f5576c 50%, #4facfe 100%);
   transform: translate3d(0px, 20px, 0) scale(0.95);
-  filter: blur(20px);
-  opacity: var(0.7);
-  transition: opacity 0.3s;
+  filter: blur(25px);
+  opacity: 0.6;
+  transition: opacity 0.3s, transform 0.3s;
   border-radius: inherit;
 }
 
-/* 
-* Prevents issues when the parent creates a 
-* stacking context. (For example, using the transform
-* property )
-*/
+.box:hover::before {
+  opacity: 0.8;
+  transform: translate3d(0px, 10px, 0) scale(1);
+}
+
 .box::after {
   content: "";
   z-index: -1;
@@ -84,19 +94,24 @@
 }
 
 .description {
-  margin: 0 0 2rem 0;
-  line-height: 1.5;
+  margin: 0 0 3rem 0;
+  line-height: 1.6;
   font-family: Dancing Script, cursive;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
 }
 
 .code {
-  background: #fafafa;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  font-size: 1rem;
   font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
     Bitstream Vera Sans Mono, Courier New, monospace;
+  color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .tabs {
@@ -104,38 +119,40 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 900px;
+  gap: 0;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 4px;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .tabs div {
-  padding: 8px 12px;
-  border: 1px solid #921aa0;
-  transition: all 0.4s;
+  padding: 12px 24px;
+  border: none;
+  transition: all 0.3s ease;
   cursor: pointer;
+  color: rgba(255, 255, 255, 0.7);
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.3px;
 }
 
 .tabs div:hover {
-  background: #921aa0;
+  background: rgba(255, 255, 255, 0.15);
   color: white;
 }
 
 .tabs div.active {
-  background: #921aa0;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%);
   color: white;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
 
 .tabs div + div {
   border-left: none;
-}
-
-.tabs div:first-child {
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
-}
-
-.tabs div:last-child {
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
 }
 
 .logo {
@@ -144,8 +161,28 @@
 }
 
 @media (max-width: 600px) {
-  .grid {
-    width: 100%;
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .description {
+    font-size: 1.2rem;
+  }
+
+  .tabs {
     flex-direction: column;
+    width: 100%;
+    padding: 8px;
+  }
+
+  .tabs div {
+    width: 100%;
+    text-align: center;
+  }
+
+  .tabs div + div {
+    border-left: none;
+    border-top: none;
+    margin-top: 4px;
   }
 }

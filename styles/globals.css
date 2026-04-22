@@ -5,12 +5,22 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 
-  background: #921aa0;
-  background: linear-gradient(
-    43deg,
-    #921aa030 0%,
-    rgba(63, 63, 99, 0.0046612394957983305) 100%
-  );
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 75%, #4facfe 100%);
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
+  min-height: 100vh;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 a {
@@ -24,20 +34,33 @@ a {
 
 button {
   cursor: pointer;
-  height: 40px;
+  height: 44px;
   border: none;
-  border-radius: 5px;
-  padding: 5px 30px;
+  border-radius: 12px;
+  padding: 8px 32px;
   font-size: 16px;
   font-family: "Roboto", sans-serif;
-  font-weight: 300;
+  font-weight: 500;
   color: white;
-  background: #921aa0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   margin-bottom: 10px;
   transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  letter-spacing: 0.5px;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+button:active {
+  transform: translateY(0);
 }
 
 button:disabled {
   background: #ccc;
   cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
